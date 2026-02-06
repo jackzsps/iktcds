@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學務處 | 一貫道崇德學院 - 方案B</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+TC:wght@300;400;600;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paper': '#F9F7F2', /* 米色宣紙底 */
+                        'ink': '#2C2C2C',   /* 墨色字 */
+                        'cinnabar': '#A83F3F', /* 硃砂紅 */
+                        'bamboo': '#5D7260',   /* 竹青色 (本頁主色) */
+                        'gold': '#C5A059',
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        // 標題使用標準楷體堆疊
+                        calligraphy: ['"KaiTi"', '"BiauKai"', '"STKaiti"', '"DFKai-SB"', '"Ma Shan Zheng"', 'serif'],
+                    },
+                    backgroundImage: {
+                        'paper-pattern': "url('https://www.transparenttextures.com/patterns/cream-paper.png')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 全局設定 */
+        body {
+            background-color: #F9F7F2;
+            color: #2C2C2C;
+            font-family: "Noto Serif TC", serif;
+        }
+        
+        /* 模擬紙張紋理 */
+        .bg-texture {
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            opacity: 0.5;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 直書排版設定 */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 0.3em;
+        }
+
+        /* 導航連結特效 */
+        .nav-link { position: relative; padding-bottom: 5px; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%;
+            background-color: #5D7260; /* 改為竹青色 */
+            transition: all 0.4s ease-out; opacity: 0.6; filter: blur(1px);
+        }
+        .nav-link:hover::after { width: 80%; left: 10%; }
+
+        /* 下拉選單動畫 */
+        .group:hover .dropdown-menu { display: block; animation: fadeIn 0.5s ease forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px) translateX(-50%); }
+            to { opacity: 1; transform: translateY(0) translateX(-50%); }
+        }
+
+        /* 印章樣式 */
+        .seal-logo {
+            border: 2px solid #A83F3F; color: #A83F3F; padding: 2px 6px;
+            font-weight: 900; border-radius: 4px; font-family: "KaiTi", "BiauKai", serif;
+        }
+        
+        /* 豎排裝飾線 */
+        .vertical-line {
+            width: 1px; height: 80px; background: linear-gradient(to bottom, transparent, #5D7260, transparent);
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col">
+
+    <div class="bg-texture"></div>
+
+    <header class="fixed top-0 w-full z-50 transition-all duration-500 bg-paper/95 backdrop-blur-sm border-b border-gray-200/50">
+        <div class="container mx-auto px-6 h-24 flex justify-between items-center">
+            
+            <a href="B.html" class="flex items-center gap-3 group">
+                <div class="seal-logo text-2xl group-hover:bg-cinnabar group-hover:text-white transition duration-500">
+                    崇德
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold tracking-widest text-ink">一貫道崇德學院</span>
+                    <span class="text-xs text-gray-500 tracking-wider font-sans uppercase">I-Kuan Tao Chong De School</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex space-x-12 text-lg font-medium tracking-widest items-center h-full">
+                <a href="#" class="nav-link hover:text-bamboo transition">關於學院</a>
+                
+                <div class="group relative h-full flex items-center cursor-pointer">
+                    <span class="nav-link text-bamboo flex items-center gap-2"> 行政單位 <i class="fas fa-caret-down text-xs text-gray-400"></i>
+                    </span>
+                    <div class="dropdown-menu hidden absolute top-[80%] left-1/2 -translate-x-1/2 w-48 pt-4">
+                        <div class="bg-paper border border-gray-200 shadow-xl rounded-sm p-2 text-center relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-bamboo"></div>
+                            <ul class="space-y-1 mt-2">
+                                <li><a href="academic-affairs.html" class="block py-3 text-ink hover:text-bamboo hover:bg-gray-100/50 transition">教務處</a></li>
+                                <li><a href="student-affairs.html" class="block py-3 text-bamboo font-bold bg-gray-100/50 transition">學務處</a></li>
+                                <li><a href="personnel-office.html" class="block py-3 text-ink hover:text-bamboo hover:bg-gray-100/50 transition">人事行政室</a></li>
+                                <li><a href="library-info.html" class="block py-3 text-ink hover:text-bamboo hover:bg-gray-100/50 transition">圖書資訊處</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="nav-link hover:text-bamboo transition">學術單位</a>
+                <a href="#" class="nav-link hover:text-bamboo transition">招生資訊</a>
+            </nav>
+
+            <div class="flex items-center gap-6">
+                <button class="text-ink hover:text-bamboo transition"><i class="fas fa-search"></i></button>
+                <button class="lg:hidden text-2xl text-ink"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative w-full pt-32 pb-20 overflow-hidden min-h-[60vh] flex items-center">
+        <div class="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-start justify-center gap-16 md:gap-24">
+            
+            <div class="vertical-text h-auto flex gap-8 select-none border-l border-gray-300 pl-10 py-4">
+                <h1 class="text-6xl font-bold text-ink font-calligraphy opacity-90 whitespace-nowrap">
+                    學務處
+                </h1>
+                <h2 class="text-2xl text-gray-500 font-light font-serif whitespace-nowrap mt-16 tracking-widest">
+                    生活 · 輔導 · 成長
+                </h2>
+            </div>
+
+            <div class="max-w-lg pt-8 md:pt-16">
+                <p class="text-lg leading-loose text-gray-700 text-justify tracking-wide font-serif">
+                    <span class="text-bamboo font-bold text-3xl float-left mr-2 mt-[-6px] font-calligraphy">學</span>
+                    務處以「德修兼備」為核心，關注學生的身心健康與生活輔導。透過完善的獎助學金制度與校園安全網絡，陪伴學子在修道的路上，安住身心，快樂學習。
+                </p>
+                <div class="mt-12 flex gap-8">
+                    <a href="#financial-aid" class="text-sm tracking-[0.2em] border-b border-bamboo text-bamboo pb-1 hover:opacity-70 transition flex items-center font-serif">
+                        獎助學金 <i class="fas fa-arrow-down ml-2 text-xs"></i>
+                    </a>
+                    <a href="#staff" class="text-sm tracking-[0.2em] border-b border-gray-400 text-gray-500 pb-1 hover:text-ink transition flex items-center font-serif">
+                        成員職掌 <i class="fas fa-arrow-down ml-2 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none" 
+             style="background-image: url('https://www.transparenttextures.com/patterns/shattered-island.png');">
+        </div>
+    </section>
+
+    <section id="staff" class="py-20 bg-white/40 border-y border-gray-200/30">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col items-center mb-16">
+                <div class="vertical-line"></div>
+                <h3 class="text-2xl font-bold tracking-widest text-ink font-calligraphy">成員職掌</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <div class="group relative p-8 bg-paper border border-gray-200 hover:border-bamboo transition duration-500 shadow-sm hover:shadow-xl">
+                    <div class="absolute -top-3 left-8 bg-paper px-2 text-bamboo text-sm tracking-widest font-bold font-serif">學務長</div>
+                    <div class="flex flex-col items-center text-center gap-4">
+                        <div class="w-20 h-20 rounded-full border border-gray-300 flex items-center justify-center text-3xl text-gray-400 group-hover:text-bamboo group-hover:border-bamboo transition bg-white">
+                            <span class="font-calligraphy">施</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-1 font-serif">施春兆</h4>
+                            <p class="text-xs text-gray-400 mb-4 tracking-wider font-sans">分機 608</p>
+                            <p class="text-sm text-gray-600 leading-relaxed font-serif">
+                                綜理學務處相關業務<br>主持學務相關會議
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative p-8 bg-paper border border-gray-200 hover:border-bamboo transition duration-500 shadow-sm hover:shadow-xl">
+                    <div class="absolute -top-3 left-8 bg-paper px-2 text-gray-500 text-sm tracking-widest font-bold font-serif">學務組員</div>
+                    <div class="flex flex-col items-center text-center gap-4">
+                        <div class="w-20 h-20 rounded-full border border-gray-300 flex items-center justify-center text-3xl text-gray-400 group-hover:text-bamboo group-hover:border-bamboo transition bg-white">
+                            <span class="font-calligraphy">張</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-1 font-serif">張嘉祐</h4>
+                            <p class="text-xs text-gray-400 mb-4 tracking-wider font-sans">分機 102</p>
+                            <p class="text-sm text-gray-600 leading-relaxed font-serif text-left px-4">
+                                • 獎助學金、減免、就貸<br>
+                                • 性別平等與校園事件<br>
+                                • 學生操行、缺曠、請假
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative p-8 bg-paper border border-gray-200 hover:border-bamboo transition duration-500 shadow-sm hover:shadow-xl">
+                    <div class="absolute -top-3 left-8 bg-paper px-2 text-gray-500 text-sm tracking-widest font-bold font-serif">校安組員</div>
+                    <div class="flex flex-col items-center text-center gap-4">
+                        <div class="w-20 h-20 rounded-full border border-gray-300 flex items-center justify-center text-3xl text-gray-400 group-hover:text-bamboo group-hover:border-bamboo transition bg-white">
+                            <span class="font-calligraphy">邱</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-1 font-serif">邱紹安</h4>
+                            <p class="text-xs text-gray-400 mb-4 tracking-wider font-sans">分機 100</p>
+                            <p class="text-sm text-gray-600 leading-relaxed font-serif text-left px-4">
+                                • 校園與宿舍安全巡視<br>
+                                • 賃居生訪視業務<br>
+                                • 環境衛生與春暉專案
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="news" class="py-20 container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+            
+            <div class="lg:col-span-2 space-y-8">
+                <div class="flex items-center gap-4 mb-8">
+                    <h3 class="text-2xl font-bold tracking-widest text-ink font-calligraphy">學務動態</h3>
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                    <a href="#" class="text-xs text-gray-400 hover:text-ink transition font-sans">MORE +</a>
+                </div>
+
+                <div class="flex gap-6 items-start group cursor-pointer">
+                    <div class="text-center shrink-0 pt-1 w-16">
+                        <span class="block text-3xl font-bold text-gray-300 group-hover:text-bamboo transition font-serif">01</span>
+                        <span class="block text-xs text-gray-400 uppercase tracking-widest mt-1 font-sans">JUL</span>
+                    </div>
+                    <div class="pb-8 border-b border-gray-200 w-full">
+                        <span class="text-xs text-cinnabar border border-cinnabar px-2 py-0.5 rounded-sm mb-2 inline-block font-serif">重要</span>
+                        <h4 class="text-lg font-bold text-ink group-hover:text-bamboo transition mb-2 font-serif">學生平安保險理賠內容及辦理方式說明</h4>
+                        <p class="text-sm text-gray-500 line-clamp-2 font-serif">
+                            113學年度學生團體保險理賠申請注意事項，請有需要的同學詳閱辦理流程。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start group cursor-pointer">
+                    <div class="text-center shrink-0 pt-1 w-16">
+                        <span class="block text-3xl font-bold text-gray-300 group-hover:text-bamboo transition font-serif">03</span>
+                        <span class="block text-xs text-gray-400 uppercase tracking-widest mt-1 font-sans">MAY</span>
+                    </div>
+                    <div class="pb-8 border-b border-gray-200 w-full">
+                        <span class="text-xs text-gold border border-gold text-gold-600 px-2 py-0.5 rounded-sm mb-2 inline-block font-serif">助學</span>
+                        <h4 class="text-lg font-bold text-ink group-hover:text-bamboo transition mb-2 font-serif">112年大專校院弱勢學生助學計畫申請</h4>
+                        <p class="text-sm text-gray-500 line-clamp-2 font-serif">
+                            符合申請資格者請於期限內至學務處提出申請，逾期不予受理。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-8 mt-4 lg:mt-0">
+                
+                <div id="financial-aid" class="bg-white p-8 shadow-sm border border-gray-100 relative">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-bamboo"></div>
+                    <h5 class="text-lg font-bold mb-6 text-ink tracking-widest font-calligraphy">獎助學金</h5>
+                    <ul class="space-y-4 font-serif">
+                        <li>
+                            <a href="#" class="flex items-center justify-between text-gray-600 hover:text-bamboo transition group border-b border-gray-100 pb-3">
+                                <span><i class="fas fa-hand-holding-heart mr-3 text-gray-300 group-hover:text-bamboo"></i>弱勢學生助學計畫</span>
+                                <i class="fas fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between text-gray-600 hover:text-bamboo transition group border-b border-gray-100 pb-3">
+                                <span><i class="fas fa-wheelchair mr-3 text-gray-300 group-hover:text-bamboo"></i>身心障礙學生獎助</span>
+                                <i class="fas fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between text-gray-600 hover:text-bamboo transition group border-b border-gray-100 pb-3">
+                                <span><i class="fas fa-first-aid mr-3 text-gray-300 group-hover:text-bamboo"></i>緊急紓困助學金</span>
+                                <i class="fas fa-chevron-right text-xs opacity-0 group-hover:opacity-100 transition"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 shadow-sm border border-gray-100 relative">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gray-400"></div>
+                    <h5 class="text-lg font-bold mb-6 text-ink tracking-widest font-calligraphy">常用表單</h5>
+                    <ul class="space-y-4 font-serif">
+                        <li class="group cursor-pointer hover:bg-gray-50 transition p-2 rounded">
+                            <div class="flex items-center gap-4">
+                                <i class="far fa-file-word text-2xl text-gray-300 group-hover:text-blue-600 transition"></i>
+                                <div>
+                                    <h6 class="font-bold text-sm group-hover:text-blue-600 transition">學生體檢表</h6>
+                                    <span class="text-xs text-gray-400 font-sans">Word 下載</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="group cursor-pointer hover:bg-gray-50 transition p-2 rounded">
+                            <div class="flex items-center gap-4">
+                                <i class="far fa-file-pdf text-2xl text-gray-300 group-hover:text-cinnabar transition"></i>
+                                <div>
+                                    <h6 class="font-bold text-sm group-hover:text-cinnabar transition">社團成立申請表</h6>
+                                    <span class="text-xs text-gray-400 font-sans">PDF 下載</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-gray-200 pt-16 pb-8 text-center mt-auto">
+        <div class="container mx-auto px-6">
+            <div class="mb-8">
+                <div class="seal-logo text-3xl inline-block mb-4">崇德</div>
+                <h5 class="text-xl font-bold tracking-widest text-ink font-calligraphy">一貫道崇德學院</h5>
+            </div>
+            <div class="text-sm text-gray-500 space-y-2 font-sans tracking-wide">
+                <p>54556 南投縣埔里鎮鯉魚路 25-8 號</p>
+                <p>(049) 242-0618 | 分機 608 (學務長) / 102 (學務組)</p>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-100 text-xs text-gray-400 flex flex-col md:flex-row justify-center gap-4">
+                <span>Copyright © 2024 IKTCDS. All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
