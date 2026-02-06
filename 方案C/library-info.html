@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖書資訊中心 | 一貫道崇德學院 IKTCDS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 視覺系統 (Dark Blue Theme) --- */
+        :root {
+            --bg-color: #FFFFFF;
+            --text-main: #1A1A1A;
+            --text-secondary: #555555;
+            --text-light: #888888;
+            --tag-red: #E63946;
+            --tag-blue: #457B9D; /* 學術通用 */
+            --tag-teal: #2A9D8F;
+            --tag-purple: #9D4EDD;
+            --tag-dark-blue: #1A5276; /* 圖書資訊中心主色 */
+            --border-color: #EEEEEE;
+            --hover-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        h1, h2, h3, h4 { font-weight: 700; color: var(--text-main); margin-bottom: 1rem; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- 導航列 (Header) --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000; height: 70px;
+            display: flex; align-items: center;
+        }
+        .nav-container {
+            width: 90%; max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; }
+
+        /* Desktop Menu */
+        .desktop-menu { display: none; gap: 2rem; align-items: center; }
+        .desktop-menu > li { position: relative; padding: 10px 0; cursor: pointer; }
+        
+        .mega-menu {
+            position: absolute; top: 100%; left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            width: 600px; background: white;
+            box-shadow: var(--hover-shadow); border-radius: 8px;
+            padding: 20px; opacity: 0; visibility: hidden;
+            transition: 0.3s;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;
+            border: 1px solid var(--border-color);
+        }
+        .desktop-menu > li:hover .mega-menu {
+            opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+        }
+        .mega-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; }
+        .mega-item:hover { background-color: #f9f9f9; }
+        .mega-item i { color: var(--tag-blue); }
+        .mega-item span { font-size: 0.9rem; font-weight: 700; }
+        .mega-item small { display: block; font-size: 0.75rem; color: var(--text-light); font-weight: 400;}
+
+        /* Mobile Controls */
+        .mobile-controls { display: flex; gap: 15px; align-items: center; }
+        .hamburger { font-size: 1.5rem; cursor: pointer; }
+
+        @media (min-width: 992px) {
+            .desktop-menu { display: flex; }
+            .mobile-controls .hamburger { display: none; }
+        }
+
+        /* --- Page Layout --- */
+        .hero-section {
+            margin-top: 70px; padding: 60px 5%;
+            /* 圖片建議：圖書館內部、電腦教室或伺服器機房 */
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://source.unsplash.com/1600x900/?library,server') center/cover;
+            border-bottom: 1px solid var(--border-color); color: white;
+        }
+
+        .breadcrumb { font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
+        .page-title { font-size: 2.5rem; margin-bottom: 10px; color: white; }
+        .page-tags span {
+            display: inline-block; padding: 4px 12px;
+            border-radius: 20px; font-size: 0.8rem;
+            color: white; margin-right: 5px; font-weight: 700;
+        }
+        .tag-dept { background-color: var(--tag-dark-blue); } /* 圖書資訊中心主色 */
+        
+        .main-container {
+            display: grid; grid-template-columns: 1fr;
+            gap: 40px; width: 90%; max-width: 1200px; margin: 40px auto;
+        }
+
+        @media (min-width: 992px) {
+            .main-container { grid-template-columns: 1fr 250px; }
+        }
+
+        .content-area { max-width: 800px; margin: 0 auto 0 0; }
+        
+        /* Card Styles */
+        .card-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: white; border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .info-card:hover {
+            transform: translateY(-5px); box-shadow: var(--hover-shadow);
+            border-color: var(--tag-dark-blue);
+        }
+        .info-card i { font-size: 2rem; color: var(--tag-dark-blue); margin-bottom: 15px; display: block;}
+        .info-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+        .info-card p { font-size: 0.9rem; color: var(--text-secondary); }
+
+        blockquote {
+            background: #f4f7f9; /* 淺藍背景 */
+            border-left: 5px solid var(--tag-dark-blue);
+            padding: 20px; margin: 30px 0;
+            font-style: italic; color: var(--text-secondary);
+        }
+
+        /* Link Section (資料庫) */
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .link-card {
+            display: flex; align-items: center; gap: 15px;
+            padding: 20px; border: 1px solid var(--border-color);
+            border-radius: 12px; transition: 0.2s; background: white;
+        }
+        .link-card:hover { border-color: var(--tag-dark-blue); background: #f4f7f9; transform: translateY(-2px); }
+        .link-icon { font-size: 1.8rem; color: var(--tag-blue); }
+        .link-title { font-weight: 700; color: var(--text-main); display: block; margin-bottom: 5px;}
+        .link-desc { font-size: 0.85rem; color: var(--text-light); }
+
+        /* Sidebar & Staff Contact */
+        .sidebar { display: none; }
+        @media (min-width: 992px) {
+            .sidebar { display: block; position: sticky; top: 100px; height: fit-content; }
+        }
+        .sidebar-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+        .toc-list li { margin-bottom: 10px; }
+        .toc-list a { font-size: 0.95rem; color: var(--text-secondary); position: relative; padding-left: 15px;}
+        .toc-list a::before { content: "•"; color: var(--tag-dark-blue); position: absolute; left: 0; }
+        .toc-list a:hover { color: var(--tag-dark-blue); }
+
+        .staff-card {
+            background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 15px;
+        }
+        .staff-name { font-weight: 700; display: block; margin-bottom: 5px; }
+        .staff-role { font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px; display: block;}
+        .staff-contact { font-size: 0.85rem; color: var(--text-secondary); }
+
+        footer {
+            background: #F8F9FA; padding: 40px 5%; text-align: center;
+            border-top: 1px solid var(--border-color); margin-top: 60px;
+            color: var(--text-light); font-size: 0.9rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: white; z-index: 2000;
+            transform: translateX(100%); transition: transform 0.3s ease-in-out;
+            padding: 20px; overflow-y: auto;
+        }
+        .mobile-menu-overlay.active { transform: translateX(0); }
+        .mobile-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .accordion-header { width: 100%; text-align: left; padding: 15px 0; border: none; background: none; font-size: 1.1rem; font-weight: 700; display: flex; justify-content: space-between; cursor: pointer; border-bottom: 1px solid #eee;}
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding-left: 15px; }
+        .accordion-content a { display: block; padding: 10px 0; color: var(--text-secondary); }
+        .accordion-header.active + .accordion-content { max-height: 500px; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="C.html" class="logo">IKTCDS</a>
+            <ul class="desktop-menu">
+                <li>關於我們</li>
+                <li>
+                    行政單位 <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
+                    <div class="mega-menu">
+                        <a href="academic-affairs.html" class="mega-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div><span>教務處</span><small>註冊 / 課務</small></div>
+                        </a>
+                        <a href="student-affairs.html" class="mega-item">
+                            <i class="fas fa-child-reaching"></i>
+                            <div><span>學務處</span><small>生活輔導 / 獎助</small></div>
+                        </a>
+                        <a href="library-info.html" class="mega-item">
+                            <i class="fas fa-book" style="color: var(--tag-dark-blue);"></i>
+                            <div><span>圖書資訊中心</span><small>借閱 / 系統 / 網路</small></div>
+                        </a>
+                         <a href="personnel-office.html" class="mega-item">
+                            <i class="fas fa-users"></i>
+                            <div><span>人事室</span><small>聘任 / 升等</small></div>
+                        </a>
+                    </div>
+                </li>
+                <li>學術單位 <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></li>
+                <li style="color: var(--tag-red); font-weight: 700;">招生資訊</li>
+            </ul>
+            <div class="mobile-controls">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-bars hamburger" onclick="toggleMobileMenu()"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <div class="mobile-header">
+            <span class="logo">IKTCDS</span>
+            <i class="fas fa-times close-btn" onclick="toggleMobileMenu()"></i>
+        </div>
+        <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">行政單位 <span>+</span></button>
+            <div class="accordion-content">
+                <a href="academic-affairs.html">🎓 教務處</a>
+                <a href="student-affairs.html">🧘 學務處</a>
+                <a href="library-info.html" style="color: var(--tag-dark-blue);">📚 圖書資訊中心</a>
+                <a href="personnel-office.html">👥 人事室</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero-section">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="breadcrumb">首頁 > 行政單位 > 圖書資訊中心</div>
+            <h1 class="page-title">圖書資訊中心</h1>
+            <div class="page-tags">
+                <span class="tag-dept">行政單位</span>
+                <span class="tag-dept" style="background-color: rgba(255,255,255,0.2);">Library & Information Center</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-container">
+        
+        <article class="content-area">
+            
+            <section id="section-intro">
+                <h2>單位簡介</h2>
+                <p>圖書資訊中心肩負本校學術資源典藏與校園資訊化建設之雙重使命。我們致力於提供豐富的圖書文獻、便捷的電子資料庫以及穩定安全的網路環境，支援全校師生進行教學、研究與學習活動。</p>
+                <blockquote>
+                    "知識的寶庫，科技的樞紐；連結傳統經典與數位未來。"
+                </blockquote>
+            </section>
+
+            <section id="section-services" style="margin-top: 40px;">
+                <h2>核心業務</h2>
+                <div class="card-grid">
+                    <div class="info-card">
+                        <i class="fas fa-book-open"></i>
+                        <h3>圖書館服務</h3>
+                        <p>圖書期刊借閱、館際合作、聖訓典藏室管理、參考諮詢及推廣活動。</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>網路與資安</h3>
+                        <p>校園網路維運、無線網路管理、資安防護體系建置及流量控管。</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-server"></i>
+                        <h3>系統與服務</h3>
+                        <p>校務資訊系統開發維護、學校網站管理、電子郵件及軟體授權服務。</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-database"></i>
+                        <h3>數位資源</h3>
+                        <p>電子資料庫採購（如華藝、萬方）、學位論文系統管理及論文比對服務。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-databases" style="margin-top: 40px;">
+                <h2>常用系統與資料庫</h2>
+                <div class="link-grid">
+                    <a href="#" class="link-card">
+                        <i class="fas fa-search link-icon"></i>
+                        <div>
+                            <span class="link-title">館藏查詢系統</span>
+                            <span class="link-desc">查詢本校圖書、期刊館藏</span>
+                        </div>
+                    </a>
+                    <a href="#" class="link-card">
+                        <i class="fas fa-globe-asia link-icon" style="color: #d9534f;"></i>
+                        <div>
+                            <span class="link-title">華藝線上圖書館</span>
+                            <span class="link-desc">臺灣學術電子期刊資料庫</span>
+                        </div>
+                    </a>
+                    <a href="#" class="link-card">
+                        <i class="fas fa-book link-icon" style="color: #f0ad4e;"></i>
+                        <div>
+                            <span class="link-title">萬方數據庫</span>
+                            <span class="link-desc">中國大陸學術期刊與論文</span>
+                        </div>
+                    </a>
+                     <a href="#" class="link-card">
+                        <i class="fas fa-file-circle-check link-icon" style="color: var(--tag-teal);"></i>
+                        <div>
+                            <span class="link-title">論文比對系統</span>
+                            <span class="link-desc">華藝 Symskan 文獻相似度檢索</span>
+                        </div>
+                    </a>
+                    <a href="#" class="link-card">
+                        <i class="fas fa-scroll link-icon" style="color: var(--tag-purple);"></i>
+                        <div>
+                            <span class="link-title">聖訓典藏系統</span>
+                            <span class="link-desc">限校內IP使用</span>
+                        </div>
+                    </a>
+                    <a href="#" class="link-card">
+                        <i class="fas fa-graduation-cap link-icon"></i>
+                        <div>
+                            <span class="link-title">臺灣碩博士論文</span>
+                            <span class="link-desc">國家圖書館知識加值系統</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section id="section-news-downloads" style="margin-top: 40px;">
+                <h2>最新公告與表單</h2>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <a href="#" class="file-card" style="border-left: 5px solid var(--tag-red);">
+                        <div>
+                            <span style="color: var(--tag-red); font-size: 0.8rem; font-weight: 700;">[資安/重要]</span>
+                            <div style="font-weight: 700; margin-top: 5px;">請全校師生加強電子郵件密碼強度並定期更換</div>
+                            <small style="color: #888;">2025-12-25</small>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #ccc;"></i>
+                    </a>
+                    <div class="file-card">
+                        <div class="file-info">
+                            <i class="fas fa-file-word file-icon" style="color: #2b579a;"></i>
+                            <div>
+                                <div class="file-name">圖書薦購單.doc</div>
+                                <small style="color: #999;">歡迎師生推薦優良圖書</small>
+                            </div>
+                        </div>
+                        <button class="btn-download" style="background: var(--tag-dark-blue);">下載</button>
+                    </div>
+                    <div class="file-card">
+                        <div class="file-info">
+                            <i class="fas fa-file-word file-icon" style="color: #2b579a;"></i>
+                            <div>
+                                <div class="file-name">聖訓典藏室使用申請表.doc</div>
+                            </div>
+                        </div>
+                        <button class="btn-download" style="background: var(--tag-dark-blue);">下載</button>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+
+        <aside class="sidebar">
+            <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #eee;">
+                <div class="sidebar-title">本頁目錄</div>
+                <ul class="toc-list">
+                    <li><a href="#section-intro">單位簡介</a></li>
+                    <li><a href="#section-services">核心業務</a></li>
+                    <li><a href="#section-databases">常用系統與資料庫</a></li>
+                    <li><a href="#section-news-downloads">最新公告與表單</a></li>
+                </ul>
+                
+                <div class="sidebar-title" style="margin-top: 30px;">單位成員</div>
+                <div class="staff-card">
+                    <span class="staff-role">主任</span>
+                    <span class="staff-name">施春兆 主任</span>
+                    <div class="staff-contact">分機: 608</div>
+                </div>
+                <div class="staff-card">
+                    <span class="staff-role">組員 (資訊/網路)</span>
+                    <span class="staff-name">蔡孟佐 先生</span>
+                    <div class="staff-contact">分機: 203</div>
+                </div>
+                 <div class="staff-card">
+                    <span class="staff-role">組員 (圖書/採編)</span>
+                    <span class="staff-name">張嘉祐 先生</span>
+                    <div class="staff-contact">分機: 102</div>
+                </div>
+
+                <div class="sidebar-title" style="margin-top: 30px;">校外資源</div>
+                <ul class="toc-list">
+                    <li><a href="#">國家圖書館</a></li>
+                    <li><a href="#">國立公共資訊圖書館</a></li>
+                    <li><a href="#">Google 學術搜尋</a></li>
+                </ul>
+            </div>
+        </aside>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 一貫道崇德學院. All Rights Reserved.</p>
+        <p>檢舉不法軟體信箱：iktcds@gmail.com</p>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+        function toggleAccordion(element) {
+            element.classList.toggle('active');
+            const span = element.querySelector('span');
+            span.textContent = element.classList.contains('active') ? '−' : '+';
+        }
+    </script>
+</body>
+</html>
