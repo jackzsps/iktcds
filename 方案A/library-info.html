@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖書資訊處 | 一貫道崇德學院</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#001f3f', /* 深海軍藍 Primary */
+                            900: '#00152b',
+                        },
+                        gold: {
+                            400: '#d4af37',
+                            500: '#c5a059', /* 香檳金 Accent */
+                            600: '#b08d55',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f8f9fa; }
+        .hero-overlay {
+            background: linear-gradient(rgba(0, 31, 63, 0.8), rgba(0, 31, 63, 0.6));
+        }
+        /* 側邊欄選單激活狀態 */
+        .sidebar-link.active {
+            background-color: #001f3f;
+            color: #ffffff;
+            border-left: 4px solid #c5a059;
+        }
+        .sidebar-link:hover:not(.active) {
+            background-color: #e2e8f0;
+            color: #001f3f;
+        }
+        /* 系統連結卡片特效 */
+        .system-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        /* 下拉選單動畫 */
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 antialiased flex flex-col min-h-screen">
+
+    <div class="bg-navy-900 text-gray-300 text-xs py-2">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="hidden md:block"></div>
+            <div class="flex space-x-4">
+                <a href="#" class="hover:text-white transition">繁體中文 ▼</a>
+                <span class="text-gray-600">|</span>
+                <a href="#" class="hover:text-white transition"><i class="fas fa-user-graduate mr-1"></i> 學生登入</a>
+                <a href="#" class="hover:text-white transition"><i class="fas fa-user-tie mr-1"></i> 教職員登入</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="bg-white shadow-md sticky top-0 z-50 h-20">
+        <div class="container mx-auto px-4 h-full">
+            <div class="flex justify-between items-center h-full">
+                <a href="A.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 bg-navy-800 rounded-full flex items-center justify-center text-gold-500 text-xl font-serif font-bold">崇</div>
+                    <div class="flex flex-col">
+                        <span class="text-navy-800 text-xl font-bold tracking-wide group-hover:text-navy-900">一貫道崇德學院</span>
+                        <span class="text-xs text-gray-500 tracking-wider">I-KUAN TAO CHONG DE SCHOOL</span>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex space-x-8 h-full items-center">
+                    <a href="#" class="text-gray-700 font-medium hover:text-navy-800 py-6">關於學院</a>
+                    <a href="#" class="text-red-700 font-bold hover:text-red-800 py-6">招生資訊</a>
+                    <a href="#" class="text-gray-700 font-medium hover:text-navy-800 py-6">學術單位</a>
+
+                    <div class="group relative cursor-pointer py-6">
+                        <a href="library-info.html" class="text-navy-800 font-bold border-b-2 border-gold-500 flex items-center gap-1">
+                            行政單位 <i class="fas fa-chevron-down text-xs opacity-50 transition-transform group-hover:rotate-180"></i>
+                        </a>
+                        <div class="dropdown-menu absolute left-0 top-full w-56 bg-white shadow-xl rounded-b border-t-4 border-gold-500 z-50">
+                            <a href="academic-affairs.html" class="block px-6 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-navy-800 border-b border-gray-100 transition">
+                                <i class="fas fa-graduation-cap w-6 text-gold-500 text-center mr-2"></i>教務處
+                            </a>
+                            <a href="student-affairs.html" class="block px-6 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-navy-800 border-b border-gray-100 transition">
+                                <i class="fas fa-user-friends w-6 text-gold-500 text-center mr-2"></i>學務處
+                            </a>
+                            <a href="library-info.html" class="block px-6 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-navy-800 border-b border-gray-100 transition bg-gray-50 font-bold">
+                                <i class="fas fa-book w-6 text-gold-500 text-center mr-2"></i>圖書資訊處
+                            </a>
+                            <a href="personnel-office.html" class="block px-6 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-navy-800 transition">
+                                <i class="fas fa-id-card w-6 text-gold-500 text-center mr-2"></i>人事室
+                            </a>
+                        </div>
+                    </div>
+
+                    <a href="#" class="text-gray-700 font-medium hover:text-navy-800 py-6">學生專區</a>
+                    <a href="#" class="text-gray-700 font-medium hover:text-navy-800 py-6">宗教推廣</a>
+                </nav>
+
+                <div class="lg:hidden">
+                    <button class="text-gray-700 text-2xl"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative w-full h-64 flex items-center justify-center bg-cover bg-center" 
+             style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="relative z-10 text-center text-white">
+            <h1 class="text-4xl font-serif font-bold tracking-widest mb-2">圖書資訊處</h1>
+            <p class="text-gold-400 font-light tracking-wide uppercase">Library & Information Services</p>
+        </div>
+    </section>
+
+    <div class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3">
+            <div class="text-sm text-gray-500 flex items-center">
+                <a href="index.html" class="hover:text-navy-800"><i class="fas fa-home mr-1"></i>首頁</a>
+                <span class="mx-2"><i class="fas fa-angle-right text-xs"></i></span>
+                <span class="text-navy-800 font-medium">行政單位</span>
+                <span class="mx-2"><i class="fas fa-angle-right text-xs"></i></span>
+                <span class="text-gold-600 font-bold">圖書資訊處</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-12 flex flex-col lg:flex-row gap-12">
+        
+        <aside class="w-full lg:w-1/4 shrink-0">
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden sticky top-24">
+                <div class="bg-navy-800 text-white py-4 px-6 font-bold text-lg">
+                    服務導覽
+                </div>
+                <nav class="flex flex-col">
+                    <a href="#systems" class="sidebar-link active py-3 px-6 border-b border-gray-100 transition duration-300 font-medium flex justify-between items-center">
+                        學術資源系統 <i class="fas fa-chevron-right text-xs opacity-50"></i>
+                    </a>
+                    <a href="#staff" class="sidebar-link py-3 px-6 border-b border-gray-100 transition duration-300 font-medium flex justify-between items-center">
+                        成員職掌 <i class="fas fa-chevron-right text-xs opacity-50"></i>
+                    </a>
+                    <a href="#news" class="sidebar-link py-3 px-6 border-b border-gray-100 transition duration-300 font-medium flex justify-between items-center">
+                        最新公告 <i class="fas fa-chevron-right text-xs opacity-50"></i>
+                    </a>
+                    <a href="#resources" class="sidebar-link py-3 px-6 border-b border-gray-100 transition duration-300 font-medium flex justify-between items-center">
+                        推薦網路資源 <i class="fas fa-chevron-right text-xs opacity-50"></i>
+                    </a>
+                    <a href="#downloads" class="sidebar-link py-3 px-6 transition duration-300 font-medium flex justify-between items-center">
+                        表單下載 <i class="fas fa-chevron-right text-xs opacity-50"></i>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="bg-gray-100 rounded-lg p-6 mt-8">
+                <h4 class="text-navy-800 font-bold mb-4 border-l-4 border-gold-500 pl-3">開館時間</h4>
+                <ul class="text-sm space-y-2 text-gray-600">
+                    <li class="flex justify-between">
+                        <span>週一至週五</span>
+                        <span class="font-bold">08:00 - 17:00</span>
+                    </li>
+                    <li class="flex justify-between text-gray-400">
+                        <span>週六、週日</span>
+                        <span>休館</span>
+                    </li>
+                    <li class="mt-2 text-xs text-red-500">* 國定假日與寒暑假另行公告</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="w-full lg:w-3/4">
+            
+            <section id="systems" class="mb-12">
+                <h2 class="text-2xl font-serif font-bold text-navy-800 mb-6 pb-2 border-b border-gray-200">學術資源入口</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    
+                    <a href="#" class="system-card bg-white p-5 rounded-lg border border-gray-200 flex flex-col items-center text-center transition group">
+                        <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1">館藏目錄查詢</h3>
+                        <p class="text-xs text-gray-500">WebPAC 線上查詢系統</p>
+                    </a>
+
+                    <a href="#" class="system-card bg-white p-5 rounded-lg border border-gray-200 flex flex-col items-center text-center transition group">
+                        <div class="w-14 h-14 bg-green-50 text-green-600 rounded-full flex items-center justify-center text-2xl mb-3 group-hover:bg-green-600 group-hover:text-white transition">
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1">華藝線上圖書館</h3>
+                        <p class="text-xs text-gray-500">CEPS 中文電子期刊</p>
+                    </a>
+
+                    <a href="#" class="system-card bg-white p-5 rounded-lg border border-gray-200 flex flex-col items-center text-center transition group">
+                        <div class="w-14 h-14 bg-red-50 text-red-600 rounded-full flex items-center justify-center text-2xl mb-3 group-hover:bg-red-600 group-hover:text-white transition">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1">萬方數據庫</h3>
+                        <p class="text-xs text-gray-500">中國學術期刊全文資料庫</p>
+                    </a>
+
+                    <a href="#" class="system-card bg-white p-5 rounded-lg border border-gray-200 flex flex-col items-center text-center transition group">
+                        <div class="w-14 h-14 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center text-2xl mb-3 group-hover:bg-purple-600 group-hover:text-white transition">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1">論文比對系統</h3>
+                        <p class="text-xs text-gray-500">Symskan 文獻相似度檢索</p>
+                    </a>
+
+                    <a href="#" class="system-card bg-white p-5 rounded-lg border border-gray-200 flex flex-col items-center text-center transition group">
+                        <div class="w-14 h-14 bg-gold-50 text-gold-600 rounded-full flex items-center justify-center text-2xl mb-3 group-hover:bg-gold-500 group-hover:text-white transition">
+                            <i class="fas fa-scroll"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1">聖訓典藏系統</h3>
+                        <p class="text-xs text-gray-500">校內專用 / 珍貴文獻</p>
+                    </a>
+
+                    <a href="#" class="system-card bg-white p-5 rounded-lg border border-gray-200 flex flex-col items-center text-center transition group">
+                        <div class="w-14 h-14 bg-gray-50 text-gray-600 rounded-full flex items-center justify-center text-2xl mb-3 group-hover:bg-gray-600 group-hover:text-white transition">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800 mb-1">博碩士論文系統</h3>
+                        <p class="text-xs text-gray-500">臺灣博碩士論文知識加值系統</p>
+                    </a>
+                </div>
+            </section>
+
+            <section id="staff" class="mb-12">
+                <h2 class="text-2xl font-serif font-bold text-navy-800 mb-6 pb-2 border-b border-gray-200">成員職掌</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-navy-800 flex gap-4">
+                        <div class="shrink-0">
+                            <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-2xl">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-navy-800">施春兆</h3>
+                            <p class="text-gold-600 font-medium text-sm">圖書資訊處 主任</p>
+                            <p class="text-xs text-gray-500 mt-1"><i class="fas fa-phone-alt mr-1"></i>分機：608</p>
+                            <p class="text-sm text-gray-600 mt-2">綜理圖書館與資訊中心相關業務、規劃發展策略。</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-600 flex gap-4">
+                        <div class="shrink-0">
+                            <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-2xl">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-navy-800">蔡孟佐</h3>
+                            <p class="text-gray-600 font-medium text-sm">資訊中心 組員</p>
+                            <p class="text-xs text-gray-500 mt-1"><i class="fas fa-phone-alt mr-1"></i>分機：203</p>
+                            <p class="text-sm text-gray-600 mt-2">校園網路管理、資安維護、校務系統開發、網頁維護。</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-gold-500 flex gap-4 md:col-span-2">
+                        <div class="shrink-0">
+                            <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-2xl">
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-navy-800">張嘉祐</h3>
+                            <p class="text-gray-600 font-medium text-sm">圖書館 組員</p>
+                            <p class="text-xs text-gray-500 mt-1"><i class="fas fa-phone-alt mr-1"></i>分機：102</p>
+                            <ul class="text-sm text-gray-600 mt-2 list-disc list-inside">
+                                <li>圖書採購與經費核銷</li>
+                                <li>館藏編目與流通管理</li>
+                                <li>圖書館自動化系統維護</li>
+                                <li>志工管理</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="news" class="mb-12">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-2xl font-serif font-bold text-navy-800">圖資公告</h2>
+                    <a href="#" class="text-sm text-gold-600 hover:underline">查看所有公告 ></a>
+                </div>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="divide-y divide-gray-100">
+                        <a href="#" class="block p-4 hover:bg-gray-50 transition flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="bg-blue-100 text-blue-600 text-xs font-bold px-2 py-1 rounded">資料庫</span>
+                                <h4 class="font-bold text-gray-800 text-sm md:text-base">萬方數據庫與選題系統試用開通</h4>
+                            </div>
+                            <span class="text-xs text-gray-400 font-mono">2023.12.27</span>
+                        </a>
+                        <a href="#" class="block p-4 hover:bg-gray-50 transition flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded">系統</span>
+                                <h4 class="font-bold text-gray-800 text-sm md:text-base">Symskan 文獻相似度檢索服務上線</h4>
+                            </div>
+                            <span class="text-xs text-gray-400 font-mono">2021.06.01</span>
+                        </a>
+                        <a href="#" class="block p-4 hover:bg-gray-50 transition flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">資安</span>
+                                <h4 class="font-bold text-gray-800 text-sm md:text-base">請勿使用非法軟體及留意釣魚信件</h4>
+                            </div>
+                            <span class="text-xs text-gray-400 font-mono">2017.03.08</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <section id="resources">
+                    <h2 class="text-2xl font-serif font-bold text-navy-800 mb-6 pb-2 border-b border-gray-200">推薦資源</h2>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="https://www.ncl.edu.tw/" target="_blank" class="flex items-center text-gray-700 hover:text-gold-600"><i class="fas fa-external-link-alt mr-2 text-gray-400"></i>國家圖書館</a></li>
+                        <li><a href="https://scholar.google.com.tw/" target="_blank" class="flex items-center text-gray-700 hover:text-gold-600"><i class="fas fa-external-link-alt mr-2 text-gray-400"></i>Google Scholar 學術搜尋</a></li>
+                        <li><a href="https://ndltd.ncl.edu.tw/" target="_blank" class="flex items-center text-gray-700 hover:text-gold-600"><i class="fas fa-external-link-alt mr-2 text-gray-400"></i>臺灣博碩士論文系統</a></li>
+                        <li><a href="https://readopac.ncl.edu.tw/nclJournal/" target="_blank" class="flex items-center text-gray-700 hover:text-gold-600"><i class="fas fa-external-link-alt mr-2 text-gray-400"></i>期刊文獻資訊網</a></li>
+                    </ul>
+                </section>
+
+                <section id="downloads">
+                    <h2 class="text-2xl font-serif font-bold text-navy-800 mb-6 pb-2 border-b border-gray-200">表單下載</h2>
+                    <div class="space-y-3">
+                        <div class="bg-white p-3 rounded border border-gray-200 flex justify-between items-center hover:shadow-md transition">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-file-word text-blue-500 text-xl"></i>
+                                <div>
+                                    <h5 class="font-bold text-sm text-gray-800">讀者圖書薦購單</h5>
+                                    <p class="text-xs text-gray-400">Word • 2017</p>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-gold-500"><i class="fas fa-download"></i></button>
+                        </div>
+                        <div class="bg-white p-3 rounded border border-gray-200 flex justify-between items-center hover:shadow-md transition">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-file-pdf text-red-500 text-xl"></i>
+                                <div>
+                                    <h5 class="font-bold text-sm text-gray-800">聖訓典藏室申請表</h5>
+                                    <p class="text-xs text-gray-400">PDF • 校內限用</p>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-gold-500"><i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <footer class="bg-navy-800 text-gray-300 pt-16 mt-auto">
+        <div class="container mx-auto px-4 pb-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-gold-500 font-serif font-bold">崇</div>
+                        <span class="text-white text-lg font-bold">一貫道崇德學院</span>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-6 text-gray-400">
+                        秉持「道學學術化、學術道學化」之精神，致力於培育兼具宗教情操與學術素養之弘道人才。
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 border-b border-gray-700 pb-2 inline-block">快速連結</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-gold-500 transition">關於我們</a></li>
+                        <li><a href="#" class="hover:text-gold-500 transition">招生資訊</a></li>
+                        <li><a href="#" class="hover:text-gold-500 transition">學術單位</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 border-b border-gray-700 pb-2 inline-block">聯絡資訊</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-3 text-gold-500"></i>54556 南投縣埔里鎮鯉魚路 25-8 號</li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt mr-3 text-gold-500"></i>(049) 242-0618</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-3 text-gold-500"></i>iktcds@iktcds.edu.tw</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bg-navy-900 border-t border-navy-800 py-4 text-center text-xs text-gray-500">
+            <p>Copyright © 2024 IKTCDS. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
